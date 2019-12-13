@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Container from "@material-ui/core/Container";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 function Copyright() {
   return (
@@ -27,27 +28,28 @@ function Copyright() {
   );
 }
 
-class SignIn extends React.Component {
+const useStyles = makeStyles(theme => ({
+  paper: {
+    marginTop: theme.spacing(8),
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+  avatar: {
+    margin: theme.spacing(1),
+    backgroundColor: theme.palette.secondary.main
+  },
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1)
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2)
+  }
+}));
+
+class Form extends React.Component {
   render() {
-    const useStyles = makeStyles(theme => ({
-      paper: {
-        marginTop: theme.spacing(8),
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center"
-      },
-      avatar: {
-        margin: theme.spacing(1),
-        backgroundColor: theme.palette.secondary.main
-      },
-      form: {
-        width: "100%", // Fix IE 11 issue.
-        marginTop: theme.spacing(1)
-      },
-      submit: {
-        margin: theme.spacing(3, 0, 2)
-      }
-    }));
     const classes = useStyles;
     return (
       <Container component="main" maxWidth="xs">
@@ -92,9 +94,9 @@ class SignIn extends React.Component {
               variant="contained"
               color="primary"
               className={classes.submit}
-              onClick={password => this.handleClick(this.props.password)}
+              onClick={() => this.handleClick(password.value, email.value)}
             >
-            Sign In
+              Sign in
             </Button>
             <Grid container>
               <Grid item xs>
@@ -116,12 +118,18 @@ class SignIn extends React.Component {
       </Container>
     );
   }
-  handleClick(password) {
-    if (true) {
-      console.log(password);
+  handleClick(password, email) {
+    if (
+      password === "" ||
+      password === undefined ||
+      email === "" ||
+      email === undefined
+    ) {
+      console.log("false = " + password + " mail = " + email);
+    } else {
+      console.log("true = " + password + " mail = " + email);
     }
   }
 }
-
 const rootElement = document.getElementById("root");
-ReactDOM.render(<SignIn />, rootElement);
+ReactDOM.render(<Form />, rootElement);
