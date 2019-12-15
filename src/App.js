@@ -5,8 +5,8 @@ import NavBar from "./components/layout/NavBar.js";
 import "./App.css";
 import Dashboard from "./components/layout/DashBoard.js";
 import backgroundImage from "./pattern.png";
-import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Pokemon from "./components/Pokemon/Pokemon.js";
+import Pokemon from "./components/Pokemon/Pokemon";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 
 class App extends React.Component {
   render() {
@@ -26,5 +26,4 @@ class App extends React.Component {
   }
 }
 
-const rootElement = document.getElementById("root");
-ReactDOM.render(<App />, rootElement);
+ReactDOM.render(<App />, document.getElementById("root"));
