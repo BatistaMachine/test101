@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
+
 import PokemonCard from "./PokemonCard";
+import Loading from "../layout/Loading";
 import axios from "axios";
 
 export default class PokemonList extends Component {
   state = {
-    url: "https://pokeapi.co/api/v2/pokemon?",
+    url: "https://pokeapi.co/api/v2/pokemon/?limit=100",
     pokemon: null
   };
 
@@ -16,25 +17,21 @@ export default class PokemonList extends Component {
 
   render() {
     return (
-      <React.Fragment>
-        <div>
-          {this.state.pokemon ? (
-            <div className="row">
-              {this.state.pokemon.map(pokemon => (
-                <PokemonCard
-                  key={pokemon.name}
-                  name={pokemon.name}
-                  url={pokemon.url}
-                />
-              ))}
-            </div>
-          ) : (
-            <h1>Loading Pokemon</h1>
-          )}
-        </div>
-      </React.Fragment>
+      <div>
+        {this.state.pokemon ? (
+          <div className="row">
+            {this.state.pokemon.map(pokemon => (
+              <PokemonCard
+                key={pokemon.name}
+                name={pokemon.name}
+                url={pokemon.url}
+              />
+            ))}
+          </div>
+        ) : (
+          <Loading />
+        )}
+      </div>
     );
   }
 }
-const rootElement = document.getElementById("root");
-ReactDOM.render(<PokemonList />, rootElement);

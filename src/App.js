@@ -1,14 +1,17 @@
-import React from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
-import ReactDOM from "react-dom";
-import NavBar from "./components/layout/NavBar.js";
-import "./App.css";
-import Dashboard from "./components/layout/DashBoard.js";
-import backgroundImage from "./pattern.png";
-import Pokemon from "./components/Pokemon/Pokemon";
-import { HashRouter as Router, Switch, Route } from "react-router-dom";
+import React, { Component } from "react";
+import { HashRouter as Router, Route, Switch } from "react-router-dom";
 
-class App extends React.Component {
+import "bootstrap/dist/css/bootstrap.min.css";
+
+import "./App.css";
+
+import backgroundImage from "./pattern.png";
+
+import NavBar from "./components/layout/NavBar";
+import Dashboard from "./components/layout/Dashboard";
+import Pokemon from "./components/pokemon/Pokemon";
+
+class App extends Component {
   render() {
     return (
       <Router>
@@ -17,7 +20,7 @@ class App extends React.Component {
           <div className="container">
             <Switch>
               <Route exact path="/" component={Dashboard} />
-              <Route exact path="/Pokemon/:pokemonIndex" component={Pokemon} />
+              <Route exact path="/pokemon/:pokemonIndex" component={Pokemon} />
             </Switch>
           </div>
         </div>
@@ -26,4 +29,4 @@ class App extends React.Component {
   }
 }
 
-ReactDOM.render(<App />, document.getElementById("root"));
+export default App;

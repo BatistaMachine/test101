@@ -1,7 +1,6 @@
 import React, { Component } from "react";
-import ReactDOM from "react-dom";
 
-import PokemonList from "../Pokemon/PokemonList";
+import PokemonList from "../pokemon/PokemonList";
 
 export default class Dashboard extends Component {
   render() {
@@ -14,5 +13,3 @@ export default class Dashboard extends Component {
     );
   }
 }
-const rootElement = document.getElementById("root");
-ReactDOM.render(<Dashboard />, rootElement);
