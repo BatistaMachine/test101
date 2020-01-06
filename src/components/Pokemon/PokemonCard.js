@@ -3,11 +3,11 @@ import { Link } from "react-router-dom";
 
 import styled from "styled-components";
 
-import spinner from "../layout/spinner.gif";
+import spinner from "./245.gif";
 
 const Sprite = styled.img`
-  width: 5em;
-  height: 5em;
+  width: 96px;
+  height: 96px;
   display: none;
 `;
 
@@ -59,7 +59,7 @@ export default class PokemonCard extends Component {
 
   render() {
     return (
-      <div className="col-md-3 col-sm-6 mb-5">
+      <div className=" col-sm-10 mt-5">
         <StyledLink to={`pokemon/${this.state.pokemonIndex}`}>
           <Card className="card">
             <h5 className="card-header">{this.state.pokemonIndex}</h5>
@@ -71,7 +71,7 @@ export default class PokemonCard extends Component {
               />
             ) : null}
             <Sprite
-              className="card-img-top rounded mx-auto mt-2"
+              className="mx-auto mt-auto"
               src={this.state.imageUrl}
               onLoad={() => this.setState({ imageLoading: false })}
               onError={() => this.setState({ toManyRequests: true })}

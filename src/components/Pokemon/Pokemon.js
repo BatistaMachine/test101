@@ -124,11 +124,11 @@ export default class Pokemon extends Component {
       })
       .join(", ");
 
-    // Get Pokemon Description
+    // Get Pokemon Description .... Is from a different end point uggh
     await Axios.get(pokemonSpeciesUrl).then(res => {
       let description = "";
       res.data.flavor_text_entries.some(flavor => {
-        if (flavor.language.name === "fr") {
+        if (flavor.language.name === "en") {
           description = flavor.flavor_text;
           return;
         }
@@ -136,7 +136,9 @@ export default class Pokemon extends Component {
       const femaleRate = res.data["gender_rate"];
       const genderRatioFemale = 12.5 * femaleRate;
       const genderRatioMale = 12.5 * (8 - femaleRate);
+
       const catchRate = Math.round((100 / 255) * res.data["capture_rate"]);
+
       const eggGroups = res.data["egg_groups"]
         .map(group => {
           return group.name
@@ -148,6 +150,7 @@ export default class Pokemon extends Component {
         .join(", ");
 
       const hatchSteps = 255 * (res.data["hatch_counter"] + 1);
+
       this.setState({
         description,
         genderRatioFemale,
@@ -157,6 +160,7 @@ export default class Pokemon extends Component {
         hatchSteps
       });
     });
+
     this.setState({
       imageUrl,
       pokemonIndex,
@@ -227,7 +231,7 @@ export default class Pokemon extends Component {
                 </h4>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    PV
+                    HP
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -249,7 +253,7 @@ export default class Pokemon extends Component {
                 </div>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    Attaque
+                    Attack
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -271,7 +275,7 @@ export default class Pokemon extends Component {
                 </div>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    Défense
+                    Defense
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -293,7 +297,7 @@ export default class Pokemon extends Component {
                 </div>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    Vitesse
+                    Speed
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -315,7 +319,7 @@ export default class Pokemon extends Component {
                 </div>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    Attaque Spéciale
+                    Sp Atk
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -337,7 +341,7 @@ export default class Pokemon extends Component {
                 </div>
                 <div className="row align-items-center">
                   <div className={`col-12 col-md-${this.state.statTitleWidth}`}>
-                    Défense Spéciale
+                    Sp Def
                   </div>
                   <div className={`col-12 col-md-${this.state.statBarWidth}`}>
                     <div className="progress">
@@ -367,30 +371,30 @@ export default class Pokemon extends Component {
           </div>
           <hr />
           <div className="card-body">
-            <h5 class="card-title text-center">Profil</h5>
+            <h5 class="card-title text-center">Profile</h5>
             <div className="row">
               <div className="col-md-6">
                 <div className="row">
                   <div className="col-6">
-                    <h6 className="float-right">Taille:</h6>
+                    <h6 className="float-right">Height:</h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-left">{this.state.height} m.</h6>
+                    <h6 className="float-left">{this.state.height} m</h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-right">Masse:</h6>
+                    <h6 className="float-right">Weight:</h6>
                   </div>
                   <div className="col-6">
                     <h6 className="float-left">{this.state.weight} kg</h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-right">Chance de Capture:</h6>
+                    <h6 className="float-right">Catch Rate:</h6>
                   </div>
                   <div className="col-6">
                     <h6 className="float-left">{this.state.catchRate}%</h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-right">Ratio par sexe:</h6>
+                    <h6 className="float-right">Gender Ratio:</h6>
                   </div>
                   <div className="col-6">
                     <div class="progress">
@@ -433,13 +437,13 @@ export default class Pokemon extends Component {
                     <h6 className="float-left">{this.state.eggGroups} </h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-right">Nombre de pas pour éclore:</h6>
+                    <h6 className="float-right">Hatch Steps:</h6>
                   </div>
                   <div className="col-6">
                     <h6 className="float-left">{this.state.hatchSteps}</h6>
                   </div>
                   <div className="col-6">
-                    <h6 className="float-right">Abilités:</h6>
+                    <h6 className="float-right">Abilities:</h6>
                   </div>
                   <div className="col-6">
                     <h6 className="float-left">{this.state.abilities}</h6>
@@ -455,11 +459,10 @@ export default class Pokemon extends Component {
             </div>
           </div>
           <div class="card-footer text-muted">
-            Les données proviennent de{" "}
+            Data From{" "}
             <a href="https://pokeapi.co/" target="_blank" className="card-link">
               PokeAPI.co
             </a>
-            ©
           </div>
         </div>
       </div>
